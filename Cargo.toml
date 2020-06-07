@@ -1,0 +1,11 @@
+[package]
+name = "symr"
+version = "0.0.0"
+authors = ["Hunter Damron <hdamron1594@yahoo.com>"]
+license = "BSD-3-Clause"
+description = "Computer algebra system written in Rust"
+repository = "https://github.com/hdamron17/symr"
+readme = "README.md"
+edition = "2018"
+
+[dependencies]
