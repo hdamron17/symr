@@ -9,3 +9,4 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
+itertools = "0.9.0"
