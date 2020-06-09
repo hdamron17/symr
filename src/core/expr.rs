@@ -15,50 +15,50 @@ pub enum Constant {
     Real(f64),
 }
 
-impl std::ops::Add<Expr> for Expr {
-    type Output = Self;
-    fn add(self, other: Self) -> Self {
+impl<'a> std::ops::Add<&'a Expr> for &'a Expr {
+    type Output = Expr;
+    fn add(self, other: Self) -> Self::Output {
         match (self, other) {
-            (Self::Add(xs), Self::Add(ys)) => {
+            (&Expr::Add(ref xs), &Expr::Add(ref ys)) => {
                 let mut xs = xs.clone();
                 xs.append(&mut ys.clone());
-                Self::Add(xs)
+                Expr::Add(xs)
             }
-            (Self::Add(xs), y) => {
+            (&Expr::Add(ref xs), y) => {
                 let mut xs = xs.clone();
-                xs.push(y);
-                Self::Add(xs)
+                xs.push(y.clone());
+                Expr::Add(xs)
             }
-            (x, Self::Add(ys)) => {
+            (x, &Expr::Add(ref ys)) => {
                 let mut ys = ys.clone();
-                ys.insert(0, x);
-                Self::Add(ys)
+                ys.insert(0, x.clone());
+                Expr::Add(ys)
             }
-            (x, y) => Self::Add(vec![x, y]),
+            (x, y) => Expr::Add(vec![x.clone(), y.clone()]),
         }
     }
 }
 
-impl std::ops::Mul<Expr> for Expr {
-    type Output = Self;
-    fn mul(self, other: Self) -> Self {
+impl<'a> std::ops::Mul<&'a Expr> for &'a Expr {
+    type Output = Expr;
+    fn mul(self, other: Self) -> Self::Output {
         match (self, other) {
-            (Self::Mul(xs), Self::Mul(ys)) => {
+            (&Expr::Mul(ref xs), &Expr::Mul(ref ys)) => {
                 let mut xs = xs.clone();
                 xs.append(&mut ys.clone());
-                Self::Mul(xs)
+                Expr::Mul(xs)
             }
-            (Self::Mul(xs), y) => {
+            (&Expr::Mul(ref xs), y) => {
                 let mut xs = xs.clone();
-                xs.push(y);
-                Self::Mul(xs)
+                xs.push(y.clone());
+                Expr::Mul(xs)
             }
-            (x, Self::Mul(ys)) => {
+            (x, &Expr::Mul(ref ys)) => {
                 let mut ys = ys.clone();
-                ys.insert(0, x);
-                Self::Mul(ys)
+                ys.insert(0, x.clone());
+                Expr::Mul(ys)
             }
-            (x, y) => Self::Mul(vec![x, y]),
+            (x, y) => Expr::Mul(vec![x.clone(), y.clone()]),
         }
     }
 }
