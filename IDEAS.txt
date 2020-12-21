@@ -1,0 +1,5 @@
+Ideas
+=====
+
+* `symr!` proc-macro which converts all literals to symr constants and identifiers to symr variables
+* Simply AST for expressions
